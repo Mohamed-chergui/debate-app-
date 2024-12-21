@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         
         title: 'Debate App',
         theme: ThemeData(
-        
+            splashFactory: NoSplash.splashFactory,
           useMaterial3: true,
         
         ),
