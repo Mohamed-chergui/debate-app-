@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/providers/Users.dart';
+import 'package:frontend/screens/homepage.dart';
+import 'package:provider/provider.dart';
+
+
 
 void main() {
   runApp(const MyApp());
 }
+
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -10,13 +17,23 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: ' Debate App ',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => Users()),
+
+      ],
+      child: MaterialApp(
+        
+        title: 'Debate App',
+        theme: ThemeData(
+        
+          useMaterial3: true,
+        
+        ),
+        
+        debugShowCheckedModeBanner: false ,
+        home: const Homepage(),
       ),
-      
     );
   }
 }

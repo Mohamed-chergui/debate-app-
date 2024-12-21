@@ -4,11 +4,12 @@ const user = require("../models/User") ;
 
 
 
-const Createuser = async (req, res) => {
 
+const Createuser = async (req, res) => {
+    
     try {
        const  newuser =   new user({
-         "user_id" : "12121212121" , 
+         "user_id" : "12121212121" ,
          "email" : "edjkndsnfjd" , 
          "password" : "sjkqdnqsd" , 
          "username":"jilali"
@@ -39,9 +40,8 @@ const getUsers = async (req, res) => {
 
 
 
-
-
 const getUser = async (req , res) => {
+
 try{
 
     const fetcheduser = await user.findById("6765ca3621c09d03193e97c8") ; 
@@ -60,7 +60,10 @@ catch(e){
 }
 }
 
-const updateUser = async ( req , res ) => {
+
+
+
+const UpdateUser = async ( req , res ) => {
 
     try{
 
@@ -83,19 +86,7 @@ const updateUser = async ( req , res ) => {
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-module.exports = { Createuser , getUsers  , getUser , updateUser}  ; 
+module.exports = { Createuser , getUsers  , getUser , UpdateUser}  ; 
 
 
 
