@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -9,106 +7,75 @@ class Homepage extends StatefulWidget {
   State<Homepage> createState() => _HomepageState();
 }
 
-class _HomepageState extends State<Homepage> with SingleTickerProviderStateMixin {
-  late TabController tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    tabController = TabController(length: 4, vsync: this);
-  }
-
-  @override
-  void dispose() {
-    tabController.dispose();
-    super.dispose();
-  }
+class _HomepageState extends State<Homepage> {
+  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 248, 242, 242),
-      body: SafeArea(
-        child: Column(
+      body: Center(
+        child: Text(
+          'Page ${selectedIndex + 1}',
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+
+        },
+        shape: const CircleBorder(),
+        elevation: 2.1,
+        child: const Icon(Icons.add),  
+
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        notchMargin: 8.0,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+       
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 18.0, left: 16),
-                  child: Text(
-                    "Agora ! ",
-                    style: GoogleFonts.indieFlower(
-                      textStyle: const TextStyle(
-                        color: Color.fromARGB(255, 61, 60, 60),
-                        fontWeight: FontWeight.w600,
-                        fontSize: 24,
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 30.0, top: 5),
-                  child: Image.asset(
-                    "Assets/icons/notification.png",
-                    width: 28,
-                    height: 25,
-                  ),
-                ),
+                _buildNavItem(Icons.home, 'Home', 0),
+                _buildNavItem(Icons.search, 'Search', 1),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(left : 14.0 , top: 33 ),
-              child: Row(
-                children: [
-                  SizedBox(
-                    
-                    child: TabBar(
-                      isScrollable: true,
-                      tabAlignment: TabAlignment.start,
-                      labelPadding: const EdgeInsets.only(right: 08),  
-                      labelColor: const Color.fromARGB(255, 0, 0, 0),
-                      unselectedLabelColor: Colors.black26,
-                      labelStyle: const TextStyle(
-                        fontFamily: "jakarta",
-                        fontWeight: FontWeight.w500,
-                        fontSize: 15 ,
-                      ),
-     dividerColor: Colors.transparent,
-                      controller: tabController,
-                      tabs: const [
-                        Tab(text: "play"),
-                        Tab(text: "agora scene"),
-                        Tab(text: "best"),
-                        Tab(text: "niggas"),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+            Row(
+              children: [
+                _buildNavItem(Icons.message, 'Messages', 2),
+                _buildNavItem(Icons.person, 'Profile', 3),
+              ],
             ),
-            SizedBox(
-              height: 130,
-              child: TabBarView(
-                controller: tabController,
-                children: const [
-                  Text(
-                    'hello',
-                    style: TextStyle(fontSize: 12, color: Colors.black26),
-                  ),
-                  Text(
-                    'niggas',
-                    style: TextStyle(fontSize: 12, color: Colors.black26),
-                  ),
-                  Text(
-                    'hello',
-                    style: TextStyle(fontSize: 12, color: Colors.black26),
-                  ),
-                  Text(
-                    'niggas',
-                    style: TextStyle(fontSize: 12, color: Colors.black26),
-                  ),
-                ],
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNavItem(IconData icon, String label, int index) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          selectedIndex = index;
+        });
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 0.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset("Assets/icons/amphitheatre.png", 
+            width: 25,
+            height: 25), 
+            const SizedBox(height: 2),
+            Text(
+              label,
+              style: TextStyle(
+                color: selectedIndex == index ? Colors.blue : Colors.grey,
+                fontSize: 12,
               ),
             ),
           ],
